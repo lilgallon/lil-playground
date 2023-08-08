@@ -1,5 +1,6 @@
 [versions]
 kotlin = "1.9.0"
+gradle-enterprise = "3.13.4"
 
 [plugins]
 # Our own convention plugins
@@ -15,3 +16,4 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref =
 
 # To use existing plugins in convention plugins, we must also declare them as libraries
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-enterprise = { module = "com.gradle.enterprise:com.gradle.enterprise.gradle.plugin", version.ref = "gradle-enterprise"}

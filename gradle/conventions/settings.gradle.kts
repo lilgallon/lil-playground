@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 include(
 	"versioning",
 	"kotlin",
+	"settings"
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

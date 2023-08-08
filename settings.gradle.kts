@@ -18,6 +18,10 @@ pluginManagement {
 	includeBuild("gradle/conventions")
 }
 
+plugins {
+	id("settings")
+}
+
 include(
 	"playground",
 )
