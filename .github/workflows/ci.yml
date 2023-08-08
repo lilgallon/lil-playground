@@ -11,7 +11,8 @@ on:
 jobs:
   ci:
     name: Check and build
-    permissions: write
+    permissions:
+      pull-requests: write
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
