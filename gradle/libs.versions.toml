@@ -1,6 +1,8 @@
 [versions]
 kotlin = "1.9.0"
 gradle-enterprise = "3.13.4"
+imgui = "1.89.6"
+lwjgl-plugin = "0.0.34"
 
 [plugins]
 # Our own convention plugins
@@ -10,9 +12,13 @@ convention-kotlin = { id = "conventions.kotlin", version = "unspecified" }
 
 # Regular plugins
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+lwjgl-plugin = { id = "org.lwjgl.plugin", version.ref = "lwjgl-plugin" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+imgui-core = { module = "kotlin.graphics:imgui-core", version.ref = "imgui" }
+imgui-gl = { module = "kotlin.graphics:imgui-gl", version.ref = "imgui" }
+imgui-glfw = { module = "kotlin.graphics:imgui-glfw", version.ref = "imgui" }
 
 # To use existing plugins in convention plugins, we must also declare them as libraries
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
