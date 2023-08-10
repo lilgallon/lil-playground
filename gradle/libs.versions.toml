@@ -3,6 +3,7 @@ kotlin = "1.9.0"
 gradle-enterprise = "3.13.4"
 imgui = "1.89.6"
 lwjgl-plugin = "0.0.34"
+lwjgl = "3.3.2"
 
 [plugins]
 # Our own convention plugins
