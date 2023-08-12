@@ -1,5 +1,10 @@
 package dev.gallon.playground
 
+import dev.gallon.playground.imgui.example
+import imgui.ImGui
+import imgui.classes.Context
+import imgui.font.FontAtlas
+import imgui.font.FontConfig
 import org.lwjgl.Version
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
@@ -11,6 +16,7 @@ import org.lwjgl.system.MemoryUtil.NULL
 import kotlin.properties.Delegates
 
 var window by Delegates.notNull<Long>();
+var imGuiContext by Delegates.notNull<Context>();
 
 fun main() {
 	println("Hello LWJGL " + Version.getVersion() + "!");
@@ -21,6 +27,8 @@ fun main() {
 	// Free the window callbacks and destroy the window
 	glfwFreeCallbacks(window);
 	glfwDestroyWindow(window);
+
+	imGuiContext.destroy()
 
 	// Terminate GLFW and free the error callback
 	glfwTerminate();
@@ -79,6 +87,8 @@ fun init() {
 	glfwShowWindow(window)
 }
 
+var t: Boolean = true
+
 fun loop() {
 	// This line is critical for LWJGL's interoperation with GLFW's
 	// OpenGL context, or any context that is managed externally.
@@ -92,6 +102,11 @@ fun loop() {
 	// bindings available for use.
 	GL.createCapabilities()
 
+	imGuiContext = Context()
+	ImGui.styleColorsDark()
+	// ImGui.setCurrentFont()
+	// imGuiContext.io.fonts.addFontFromFileTTF("fonts/roboto.ttf", 18f)
+
 	// Set the clear color
 	glClearColor(1.0f, 0.0f, 0.0f, 0.0f)
 
@@ -99,6 +114,13 @@ fun loop() {
 	// the window or has pressed the ESCAPE key.
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT) // clear the framebuffer
+
+		ImGui.newFrame()
+		ImGui.text("TRUCUCUCU")
+		// example()
+		// ImGui.showDemoWindow(::t);
+		ImGui.render()
+
 		glfwSwapBuffers(window) // swap the color buffers
 
 		// Poll for window events. The key callback above will only be
