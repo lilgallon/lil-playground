@@ -1,6 +1,9 @@
 [versions]
 kotlin = "1.9.0"
+kotlin-coroutines = "1.7.3"
 gradle-enterprise = "3.13.4"
+javafx-plugin = "0.0.13"
+javafx = "20"
 
 [plugins]
 # Our own convention plugins
@@ -10,9 +13,12 @@ convention-kotlin = { id = "conventions.kotlin", version = "unspecified" }
 
 # Regular plugins
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+javafx-plugin = { id = "org.openjfx.javafxplugin", version.ref = "javafx-plugin" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+kotlin-coroutines-javafx = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-javafx", version.ref = "kotlin-coroutines" }
 
 # To use existing plugins in convention plugins, we must also declare them as libraries
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
