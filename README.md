@@ -3,18 +3,18 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/lilgallon/lil-playground/.github%2Fworkflows%2Fci.yml?style=for-the-badge&logo=gradle&label=CI&link=https%3A%2F%2Fgithub.com%2Flilgallon%2Flil-playground%2Factions%2Fworkflows%2Fci.yml)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/lilgallon/lil-playground/.github%2Fworkflows%2Fcd.yml?style=for-the-badge&logo=gradle&label=CD&link=https%3A%2F%2Fgithub.com%2Flilgallon%2Flil-playground%2Factions%2Fworkflows%2Fcd.yml)
 
-A place where I learn about advanced topics in a funny way
+A place where I learn about advanced topics in a funny way. I also comment every
+part of the code to make sure I understand what I am doing.
+
+**I may be wrong on some statements, I'm still learning, do not take everything
+you read as true**
 
 ## 1. Challenges
 
 ### 1.1. Gradle
 
-#### Challenge
-
 This project has to follow all the best practices of gradle to have the best
 possible performance.
-
-#### Solution
 
 **template:** I templated the project using https://gitlab.com/opensavvy/playgrounds/gradle
 that already respect the best practices.
@@ -47,27 +47,20 @@ the artefact and the changelog
 But the best way to have caching for gradle in Github Workflows is to use
 [gradle build action](https://github.com/gradle/gradle-build-action).
 
-**CD:** Not started yet
+**CD:** It automatically builds the app when a tag is pushed on the repo. The
+tag as to respect a regex though. A github release will then be created with
+a changelog and the built artefacts.
 
 ### 1.3. Github projects
 
 All the tasks and issues will be traced using [Github Projects](https://github.com/users/lilgallon/projects/5).
 
-### 1.4. Coroutines, Physics and LWGJL
+### 1.4. Coroutines
 
-#### Challenge
+I need to learn more about Kotlin Coroutines. The best way for it is to do heavy
+parallel tasks. There are two interested things to do:
+- Fractal Viewer
+- Simple Physics Engine
 
-I need to learn more about Kotlin Coroutines and java threading in general. For
-Minecraft Modding development I also need to learn more about LWGJL. And I am
-interested in physics & mechanics. So why not learn about all these topics by
-coding an optimized physics engine using coroutines for parallel tasks? For
-rendering, I will use LWGJL. 
-
-Note: This engine has to be simple. I won't dive straight in super complicated
-subjects. For now, it will only have rigid circles, where collision detection
-and resolution is relatively easy. The main goal is to be able to render a lot
-of these circles in a single scene.
-
-#### Solution
-
-Not started yet
+I will use JavaFX, because the API is nice to use with Kotlin, and it's easy to
+code a GUI. It also has support to render scenes.
