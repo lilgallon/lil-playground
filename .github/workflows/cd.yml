@@ -33,7 +33,5 @@ jobs:
         run: ./gradlew -PappVersion=${{github.ref_name}} assembleDist --scan
 
       - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body_path: CHANGELOG.md
-          files: ./playground/build/distributions/**
+        run: |-
+          gh release create ${{github.ref_name}} ./playground/build/distributions/** --generate-notes
