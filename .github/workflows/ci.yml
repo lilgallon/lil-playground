@@ -4,10 +4,26 @@ on:
     branches:
     - main
     - release
+    paths:
+      - .github/workflows/ci.yml
+      - gradle/libs.versions.toml
+      - .editorconfig
+      - '**.properties'
+      - '**.kt'
+      - '**.kts'
+      - '**.java'
   pull_request:
     branches:
     - main
     - release
+    paths:
+      - .github/workflows/ci.yml
+      - gradle/libs.versions.toml
+      - .editorconfig
+      - '**.properties'
+      - '**.kt'
+      - '**.kts'
+      - '**.java'
 
 jobs:
   ci:
@@ -33,6 +49,9 @@ jobs:
         gradle-home-cache-cleanup: true
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+
+    - name: Execute Gradle ktlintCheck
+      run: ./gradlew ktlintCheck --scan
 
     - name: Execute Gradle build
       run: ./gradlew build --scan
