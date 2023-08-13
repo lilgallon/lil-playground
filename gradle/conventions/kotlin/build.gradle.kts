@@ -5,7 +5,7 @@ plugins {
 group = "conventions"
 
 dependencies {
+	implementation(projects.versioning)
 	implementation(libs.gradle.ktlint)
 	implementation(libs.gradle.kotlin)
-	implementation(projects.versioning)
 }

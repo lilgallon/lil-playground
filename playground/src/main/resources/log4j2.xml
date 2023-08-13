@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration strict="true" status="INFO">
+    <Properties>
+        <Property name="pattern">%style{%d}{magenta} %highlight{[%-6p]} %style{%-6.6X{coroutine}}{yellow} [%-16.16t] %style{%.25c{1}}{underline} - %highlight{%m%n%throwable}</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}" disableAnsi="false"/>
+        </Console>
+        <File name="File" fileName="all.log" immediateFlush="false" append="false">
+            <PatternLayout pattern="${pattern}" disableAnsi="false"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -25,5 +25,13 @@ tasks.named("configJavafxRun") {
 dependencies {
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.coroutines.javafx)
+    implementation(libs.kotlin.coroutines.slf4j)
+
+    // logging
+    implementation(kotlin("reflect")) // for kt logging to  determine appropriate logger names from classes
+    runtimeOnly(libs.slf4j.api) // The logging api used by kotlin logging
+    implementation(libs.log4j.kotlin) // The api we will use in the code
+    implementation(libs.log4j.slf4j2) // The implementation of slf4j (log4j)
+
     testImplementation(libs.kotlin.test)
 }
