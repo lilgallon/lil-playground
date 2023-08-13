@@ -9,20 +9,25 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.javafx.JavaFx
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.coroutines.slf4j.MDCContext
+import org.apache.logging.log4j.kotlin.logger
+import org.slf4j.MDC
 import kotlin.coroutines.CoroutineContext
 
+const val COROUTINE_MDC = "coroutine"
+
 class Playground : Application(), CoroutineScope {
+
+    private val logger = logger()
 
     /**
      * It is possible to cancel all the children coroutines of our app by
      * cancelling this job. It works because this job is passed in the main
      * coroutine scope.
      *
-     * TODO: We may rather use a SupervisorJob, so that cancellation is not
-     *  propagated upwards. It means that if a child cancels its execution, it
-     *  won't cancel this job, and terminate this App.
+     * We may rather use a SupervisorJob, so that cancellation is not
+     * propagated upwards. It means that if a child cancels its execution, it
+     * won't cancel this job, and terminate this App.
      */
     private var job = Job()
 
@@ -36,14 +41,18 @@ class Playground : Application(), CoroutineScope {
      * context.
      */
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.JavaFx + job
+        get() = Dispatchers.JavaFx + job + MDCContext()
+
+    init {
+        MDC.put(COROUTINE_MDC, "main")
+    }
 
     override fun start(primaryStage: Stage?) {
         val javaVersion = System.getProperty("java.version")
         val javafxVersion = System.getProperty("javafx.version")
 
-        log("javaVersion = $javaVersion")
-        log("javafxVersion = $javafxVersion")
+        logger.info { "javaVersion = $javaVersion" }
+        logger.info { "javafxVersion = $javafxVersion" }
 
         val l = Label("Hello, JavaFX $javafxVersion, running on Java $javaVersion.")
         val scene = Scene(StackPane(l), 640.0, 480.0)
@@ -56,11 +65,6 @@ class Playground : Application(), CoroutineScope {
         job = Job()
     }
 }
-
-fun log(msg: String) = println(
-    "${SimpleDateFormat("yyyyMMdd-HHmmss.sss").format(Date())} " +
-        "[${Thread.currentThread().name}] $msg"
-)
 
 fun main(args: Array<String>) {
     Application.launch(Playground::class.java, *args)
