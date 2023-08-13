@@ -1,15 +1,23 @@
 package dev.gallon.playground
 
 import atlantafx.base.theme.PrimerDark
+import dev.gallon.playground.api.Module
+import dev.gallon.playground.controls.ControlsBuilder
+import dev.gallon.playground.modules.ExampleModule
 import javafx.application.Application
+import javafx.geometry.Insets
 import javafx.scene.Scene
 import javafx.scene.control.Label
-import javafx.scene.layout.StackPane
+import javafx.scene.control.TitledPane
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.GridPane
+import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.javafx.JavaFx
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.slf4j.MDCContext
 import org.apache.logging.log4j.kotlin.logger
 import org.slf4j.MDC
@@ -44,6 +52,8 @@ class Playground : Application(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.JavaFx + job + MDCContext()
 
+    private var activeModule: Module? = null
+
     init {
         MDC.put(COROUTINE_MDC, "main")
     }
@@ -52,14 +62,52 @@ class Playground : Application(), CoroutineScope {
         val javaVersion = System.getProperty("java.version")
         val javafxVersion = System.getProperty("javafx.version")
 
+        logger.info { "Playground starting" }
         logger.info { "javaVersion = $javaVersion" }
         logger.info { "javafxVersion = $javafxVersion" }
 
+        // Styling
         setUserAgentStylesheet(PrimerDark().userAgentStylesheet)
-        val l = Label("Hello, JavaFX $javafxVersion, running on Java $javaVersion.")
-        val scene = Scene(StackPane(l), 640.0, 480.0)
+
+        // Layout
+        val mainPane = BorderPane().apply {
+            padding = Insets(15.0, 15.0, 15.0, 15.0)
+
+            top = TitledPane(
+                "Playground controls",
+                GridPane().apply {
+                    // Here go all the controls that are common for all the modules
+                    add(
+                        ControlsBuilder.buildSelect(ExampleModule()) { selectedModule ->
+                            logger.info {
+                                "Current module: ${activeModule?.name} | " +
+                                    "Selected module: ${selectedModule.name}"
+                            }
+
+                            if (selectedModule.name != activeModule?.name) {
+                                logger.info { "Module changed" }
+                                activeModule?.destroy()
+                                center = runBlocking {
+                                    selectedModule.build()
+                                }
+                            } else {
+                                logger.info { "Module is the same" }
+                            }
+                        },
+                        0,
+                        0
+                    )
+                }
+            ).apply { isCollapsible = false }
+
+            center = Pane(Label("Select a module"))
+        }
+
+        val scene = Scene(mainPane, 640.0, 480.0)
         primaryStage?.setScene(scene)
         primaryStage?.show()
+
+        logger.info { "Playground started" }
     }
 
     fun cancel() {
