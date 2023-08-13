@@ -3,6 +3,10 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/lilgallon/lil-playground/.github%2Fworkflows%2Fci.yml?style=for-the-badge&logo=gradle&label=CI&link=https%3A%2F%2Fgithub.com%2Flilgallon%2Flil-playground%2Factions%2Fworkflows%2Fci.yml)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/lilgallon/lil-playground/.github%2Fworkflows%2Fcd.yml?style=for-the-badge&logo=gradle&label=CD&link=https%3A%2F%2Fgithub.com%2Flilgallon%2Flil-playground%2Factions%2Fworkflows%2Fcd.yml)
 
+![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/lilgallon_lil-playground/main?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud)
+![Sonar Bugs](https://img.shields.io/sonar/bugs/lilgallon_lil-playground/main?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud)
+![Sonar Code Smells](https://img.shields.io/sonar/code_smells/lilgallon_lil-playground/main?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud)
+
 A place where I learn about advanced topics in a funny way. I also comment every
 part of the code to make sure I understand what I am doing.
 
