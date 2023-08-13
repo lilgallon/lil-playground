@@ -5,8 +5,8 @@ import kotlin.test.assertTrue
 
 class Test {
 
-	@Test
-	fun helloWorld() {
-		assertTrue(true)
-	}
+    @Test
+    fun helloWorld() {
+        assertTrue(true)
+    }
 }
