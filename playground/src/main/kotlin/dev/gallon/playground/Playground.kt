@@ -1,5 +1,6 @@
 package dev.gallon.playground
 
+import atlantafx.base.theme.PrimerDark
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.control.Label
@@ -54,6 +55,7 @@ class Playground : Application(), CoroutineScope {
         logger.info { "javaVersion = $javaVersion" }
         logger.info { "javafxVersion = $javafxVersion" }
 
+        setUserAgentStylesheet(PrimerDark().userAgentStylesheet)
         val l = Label("Hello, JavaFX $javafxVersion, running on Java $javaVersion.")
         val scene = Scene(StackPane(l), 640.0, 480.0)
         primaryStage?.setScene(scene)
